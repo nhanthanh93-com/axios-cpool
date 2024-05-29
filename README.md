@@ -5,15 +5,36 @@
 [![npm version](https://img.shields.io/npm/v/axios-cpool.svg?style=flat-square)](https://www.npmjs.org/package/axios-cpool) [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger) [![install size](https://img.shields.io/badge/dynamic/json?url=https://packagephobia.com/v2/api.json?p=axios-cpool&query=$.install.pretty&label=install%20size&style=flat-square)](https://packagephobia.now.sh/result?p=axios-cpool) [![npm downloads](https://img.shields.io/npm/dm/axios-cpool.svg?style=flat-square)](https://npm-stat.com/charts.html?package=axios-cpool)
 
 
-### Description
+### Introduction
 
 This package simplifies and streamlines HTTP request management using Axios. It offers two core components:
 
 Client: A streamlined wrapper around Axios that efficiently manages configurations and instances.
 
-ClientPool: Designed for high-load scenarios, this component manages multiple Client instances, enabling reuse and optimizing the handling of numerous requests.
+ClientPool: Designed for high-load scenarios, this component manages multiple Client instances, enabling reuse and optimizing the handling of numerous requests. The [![poolSize](https://img.shields.io/badge/poolSize-fbfbfb)] parameter acts as a maximum limit on the number of client instances that can be simultaneously held within the pool.
 
 This streamlined approach simplifies the integration of Axios into your projects, especially in situations demanding high performance and efficient resource utilization.
+
+##### Key Functions of ClientPool:
+
+  - Resource Control: By setting a poolSize, you prevent the excessive consumption of resources by ensuring that the number of active client instances remains within defined bounds.
+
+  - Client Lifecycle Management: When the pool reaches its capacity (poolSize), adding a new client automatically triggers the removal of the oldest client from the pool. This mechanism efficiently manages the lifecycle of clients, prioritizing newer instances and maintaining optimal performance.
+
+  This streamlined approach simplifies the integration of Axios into your projects, especially in situations demanding high performance and efficient resource utilization.
+
+##### Key Features:
+
+ - Easy to Use: Simple and intuitive API for making HTTP requests.
+
+ - Client Pool: Manage multiple API clients with ease using the client pool.
+
+ - Configurable: Easily configure base URLs and request timeouts.
+
+ - TypeScript Support: Fully written in TypeScript for type safety and improved development experience.
+
+ - Error Handling: Built-in error handling with Axios interceptors.
+
 
 ---
 ### Installing
@@ -66,7 +87,7 @@ const apiClient = new Client('https://api.example.com');
     const deleteResponse = await apiClient.delete('/users/123');
     console.log('DELETE Response:', deleteResponse.data);
 
-    // Make an UPDATE request (assuming PUT for update)
+    // Make an UPDATE request
     const updateData = { name: 'Updated Name', age: 35 };
     const updateResponse = await apiClient.put('/users/123', updateData);
     console.log('UPDATE Response:', updateResponse.data);
@@ -99,14 +120,14 @@ cpool.addClient('server1', client1);
 cpool.addClient('server2', client2);
 cpool.addClient('server3', client3);
 
-console.log('Current clients in pool:', clientPool.listClients());
+console.log('Current clients in pool:', cpool.listClients());
 
 async fetchData() {
   try {
-    const server2Data = await clientPool.request('server2', 'get', '/posts/1');
+    const server2Data = await cpool.request('server2', 'get', '/posts/1');
     console.log('Server2 Data:', server2Data);
 
-    const server3Data = await clientPool.request('server3', 'get', '/posts/1');
+    const server3Data = await cpool.request('server3', 'get', '/posts/1');
     console.log('Server3 Data:', server3Data);
   } catch (error) {
     console.error('Error fetching data:', error);
@@ -119,6 +140,8 @@ async fetchData() {
 ### Credits
 Special thanks to the axios library for providing a robust and versatile HTTP client that served as the foundation for this package.
 
+
+### Support
 If you have enjoyed this package and would like to buy me a coffee ☕️
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/nhanthanh93)
