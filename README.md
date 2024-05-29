@@ -76,42 +76,44 @@ const apiClient = new Client('https://api.example.com');
 })();
 ```
 
-Assuming you have two API servers:
+Assuming you have multiple API servers:
 
-    1. https://api-server1.com
-    2. https://api-server2.com
+    1. https://jsonplaceholder.typicode.com
+    2. https://jsonplaceholder.typicode.com
+    3. https://jsonplaceholder.typicode.com
     
 ```js
 import { Client, ClientPool } from "axios-cpool";
 
 // Create instances of Client for each API server
-const client1 = new Client('https://api-server1.com');
-const client2 = new Client('https://api-server2.com');
+const client1 = new Client('https://jsonplaceholder.typicode.com');
+const client2 = new Client('https://jsonplaceholder.typicode.com');
+const client3 = new Client('https://jsonplaceholder.typicode.com'); // additional client for testing pool size
+
+// Create client pool with a size limit
+const poolSize = 2;
 
 // Create a ClientPool and add clients to it
-const pool = new ClientPool();
-pool.addClient("server1", client1);
-pool.addClient("server2", client2);
+const cpool = new ClientPool(poolSize);
+cpool.addClient('server1', client1);
+cpool.addClient('server2', client2);
+cpool.addClient('server3', client3);
 
-async getUsers() {
-    try {
-        const clientPool1 = pool.getClient("server1");
-        const response = await clientPool1.get("/users");
-        console.log("Response from server 1:", response);
-    } catch (error) {
-        console.error(error);
-    }
+console.log('Current clients in pool:', clientPool.listClients());
+
+async fetchData() {
+  try {
+    const server2Data = await clientPool.request('server2', 'get', '/posts/1');
+    console.log('Server2 Data:', server2Data);
+
+    const server3Data = await clientPool.request('server3', 'get', '/posts/1');
+    console.log('Server3 Data:', server3Data);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
 }
 
-async getTasks() {
-    try {
-        const clientPool2 = pool.getClient("server2");
-        const rs = await clientPool2.get("/tasks")
-        console.log("Response from server 2:", response);
-    } catch (error) {
-        console.error("Error from server 2:",error);
-    }
-}
+
 ``` 
 
 ### Credits

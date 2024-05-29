@@ -31,8 +31,8 @@ class Client {
     return this.instance.delete<T>(url, config);
   }
 
-  public async update<T>(url: string, data: any, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
-    return this.instance.put<T>(url, data, config); // assuming PUT for update
+  public async put<T>(url: string, data: any, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
+    return this.instance.put<T>(url, data, config);
   }
 }
 
