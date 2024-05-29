@@ -88,10 +88,10 @@ var Client = /** @class */ (function () {
             });
         });
     };
-    Client.prototype.update = function (url, data, config) {
+    Client.prototype.put = function (url, data, config) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.instance.put(url, data, config)]; // assuming PUT for update
+                return [2 /*return*/, this.instance.put(url, data, config)];
             });
         });
     };

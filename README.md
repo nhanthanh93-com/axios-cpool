@@ -11,13 +11,13 @@ This package simplifies and streamlines HTTP request management using Axios. It 
 
 Client: A streamlined wrapper around Axios that efficiently manages configurations and instances.
 
-ClientPool: Designed for high-load scenarios, this component manages multiple Client instances, enabling reuse and optimizing the handling of numerous requests. The [![poolSize](https://img.shields.io/badge/poolSize-fbfbfb)] parameter acts as a maximum limit on the number of client instances that can be simultaneously held within the pool.
+ClientPool: Designed for high-load scenarios, this component manages multiple Client instances, enabling reuse and optimizing the handling of numerous requests. The *poolSize* parameter acts as a maximum limit on the number of client instances that can be simultaneously held within the pool.
 
 This streamlined approach simplifies the integration of Axios into your projects, especially in situations demanding high performance and efficient resource utilization.
 
 ##### Key Functions of ClientPool:
 
-  - Resource Control: By setting a poolSize, you prevent the excessive consumption of resources by ensuring that the number of active client instances remains within defined bounds.
+  - Resource Control: By setting a *poolSize*, you prevent the excessive consumption of resources by ensuring that the number of active client instances remains within defined bounds.
 
   - Client Lifecycle Management: When the pool reaches its capacity (poolSize), adding a new client automatically triggers the removal of the oldest client from the pool. This mechanism efficiently manages the lifecycle of clients, prioritizing newer instances and maintaining optimal performance.
 
