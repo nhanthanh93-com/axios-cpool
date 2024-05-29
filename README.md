@@ -91,7 +91,7 @@ const client2 = new Client('https://api-server2.com');
 // Create a ClientPool and add clients to it
 const pool = new ClientPool();
 pool.addClient("server1", client1);
-pool.addClient("server2, client2);
+pool.addClient("server2", client2);
 
 async getUsers() {
     try {
