@@ -23,29 +23,29 @@ Axios is a required package that must be installed.
 Using npm:
 
 ```bash
-$ npm i axios client-pool
+$ npm i axios axios-cpool
 ```
 
 using yarn:
 
 ```bash
-$ yarn add axios client-pool
+$ yarn add axios axios-cpool
 ```
 
 Once the package is installed, you can import the library using import or require approach:
 
 ```js 
-import {Client, ClientPool} from "client-pool";
+import {Client, ClientPool} from "axios-cpool";
 ```
 
 If you use require for importing, only default export is available:
 
-```const { Client, ClientPool } = require("client-pool");```
+```const { Client, ClientPool } = require("axios-cpool");```
 
 ### Example
 
 ```js
-import { Client } from "client-pool";
+import { Client } from "axios-cpool";
 
 // Create an instance of Client for your API server
 const apiClient = new Client('https://api.example.com');
@@ -82,7 +82,7 @@ Assuming you have two API servers:
     2. https://api-server2.com
     
 ```js
-import { Client, ClientPool } from "client-pool";
+import { Client, ClientPool } from "axios-cpool";
 
 // Create instances of Client for each API server
 const client1 = new Client('https://api-server1.com');
