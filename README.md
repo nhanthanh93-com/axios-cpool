@@ -68,7 +68,7 @@ const apiClient = new Client('https://api.example.com');
 
     // Make an UPDATE request (assuming PUT for update)
     const updateData = { name: 'Updated Name', age: 35 };
-    const updateResponse = await apiClient.update('/users/123', updateData);
+    const updateResponse = await apiClient.put('/users/123', updateData);
     console.log('UPDATE Response:', updateResponse.data);
   } catch (error) {
     console.error('Error:', error);
