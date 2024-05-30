@@ -58,12 +58,14 @@ var Client = /** @class */ (function () {
             baseURL: baseURL,
             timeout: timeout,
         });
-        this.instance.interceptors.response.use(function (response) {
-            return response;
-        }, function (error) {
-            return Promise.reject(error);
-        });
+        this.instance.interceptors.response.use(function (response) { return response; }, function (error) { return Promise.reject(error); });
     }
+    Client.prototype.setHeaders = function (headers) {
+        var _this = this;
+        Object.keys(headers).forEach(function (key) {
+            _this.instance.defaults.headers.common[key] = headers[key];
+        });
+    };
     Client.prototype.get = function (url, params, config) {
         return __awaiter(this, void 0, void 0, function () {
             var finalConfig;
@@ -92,6 +94,13 @@ var Client = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 return [2 /*return*/, this.instance.put(url, data, config)];
+            });
+        });
+    };
+    Client.prototype.patch = function (url, data, config) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, this.instance.patch(url, data, config)];
             });
         });
     };
