@@ -4,7 +4,7 @@ import axios, {
   AxiosRequestConfig,
   AxiosResponse,
   RawAxiosRequestHeaders,
-} from "axios";
+} from 'axios';
 
 class Client {
   private instance: AxiosInstance;
@@ -15,7 +15,7 @@ class Client {
     });
     this.instance.interceptors.response.use(
       (response) => response,
-      (error: AxiosError) => Promise.reject(error)
+      (error: AxiosError) => Promise.reject(error),
     );
   }
 
@@ -28,7 +28,7 @@ class Client {
   public async get<T>(
     url: string,
     params?: Record<string, any>,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<AxiosResponse<T>> {
     const finalConfig = {
       ...config,
@@ -40,14 +40,14 @@ class Client {
   public async post<T>(
     url: string,
     data: object = {},
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<AxiosResponse<T>> {
     return this.instance.post<T>(url, data, config);
   }
 
   public async delete<T>(
     url: string,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<AxiosResponse<T>> {
     return this.instance.delete<T>(url, config);
   }
@@ -55,7 +55,7 @@ class Client {
   public async put<T>(
     url: string,
     data: any,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<AxiosResponse<T>> {
     return this.instance.put<T>(url, data, config);
   }
@@ -63,7 +63,7 @@ class Client {
   public async patch<T>(
     url: string,
     data: any,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<AxiosResponse<T>> {
     return this.instance.patch<T>(url, data, config);
   }

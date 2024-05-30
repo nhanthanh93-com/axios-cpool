@@ -1,5 +1,5 @@
-import { AxiosRequestConfig } from "axios";
-import Client from "./client";
+import { AxiosRequestConfig } from 'axios';
+import Client from './client';
 
 class ClientPool {
   private clients: Map<string, Client>;
@@ -31,7 +31,7 @@ class ClientPool {
   public removeClient(name: string): void {
     this.clients.delete(name);
     this.clientQueue = this.clientQueue.filter(
-      (clientName) => clientName !== name
+      (clientName) => clientName !== name,
     );
   }
 
@@ -41,10 +41,10 @@ class ClientPool {
 
   public async request<T>(
     clientName: string,
-    method: "get" | "post" | "delete" | "put",
+    method: 'get' | 'post' | 'delete' | 'put',
     url: string,
     dataOrParams?: any,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<T> {
     const client = this.clients.get(clientName);
     if (!client) {
@@ -53,20 +53,20 @@ class ClientPool {
 
     let response;
     switch (method) {
-      case "get":
+      case 'get':
         response = await client.get<T>(url, dataOrParams, config);
         break;
-      case "post":
+      case 'post':
         response = await client.post<T>(url, dataOrParams, config);
         break;
-      case "delete":
+      case 'delete':
         response = await client.delete<T>(url, config);
         break;
-      case "put":
+      case 'put':
         response = await client.put<T>(url, dataOrParams, config);
         break;
       default:
-        throw new Error("Invalid method");
+        throw new Error('Invalid method');
     }
 
     return response.data;

@@ -6,7 +6,10 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "prettier": "prettier --check .",
     "build": "tsc",
+    "test": "jest",
+    "format": "prettier --write .",
     "start": "node dist/index.js"
   },
   "engines": {
