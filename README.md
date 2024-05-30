@@ -70,6 +70,12 @@ import { Client } from 'axios-cpool';
 // Create an instance of Client for your API server
 const apiClient = new Client('https://api.example.com');
 
+// Set headers for the clients: Authorization, Api-key, etc...
+apiClient.setHeaders({
+  Authorization: 'Bearer token1',
+  'Custom-Header': 'customValue1'
+});
+
 // Example usage
 (async () => {
   try {
@@ -109,6 +115,13 @@ import { Client, ClientPool } from "axios-cpool";
 const client1 = new Client('https://jsonplaceholder.typicode.com');
 const client2 = new Client('https://jsonplaceholder.typicode.com');
 const client3 = new Client('https://jsonplaceholder.typicode.com'); // additional client for testing pool size
+
+
+// Set headers for the clients: Authorization, Api-key, etc...
+client1.setHeaders({
+  Authorization: 'Bearer token1',
+  'Custom-Header': 'customValue1'
+});
 
 // Create client pool with a size limit
 const poolSize = 2;
