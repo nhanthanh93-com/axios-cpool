@@ -30,19 +30,27 @@ class ClientPool {
 
   public removeClient(name: string): void {
     this.clients.delete(name);
-    this.clientQueue = this.clientQueue.filter(clientName => clientName !== name);
+    this.clientQueue = this.clientQueue.filter(
+      (clientName) => clientName !== name,
+    );
   }
 
   public listClients(): string[] {
     return Array.from(this.clients.keys());
   }
 
-  public async request<T>(clientName: string, method: 'get' | 'post' | 'delete' | 'put', url: string, dataOrParams?: any, config?: AxiosRequestConfig): Promise<T> {
+  public async request<T>(
+    clientName: string,
+    method: 'get' | 'post' | 'delete' | 'put',
+    url: string,
+    dataOrParams?: any,
+    config?: AxiosRequestConfig,
+  ): Promise<T> {
     const client = this.clients.get(clientName);
     if (!client) {
       throw new Error(`Client for ${clientName} not found`);
     }
-    
+
     let response;
     switch (method) {
       case 'get':
@@ -60,7 +68,7 @@ class ClientPool {
       default:
         throw new Error('Invalid method');
     }
-    
+
     return response.data;
   }
 }
