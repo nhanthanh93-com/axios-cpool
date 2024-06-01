@@ -1,6 +1,6 @@
 {
   "name": "axios-cpool",
-  "version": "1.2.3",
+  "version": "1.2.31",
   "description": "This package provides a simple and efficient way to manage HTTP requests using Axios. It includes two main components: the Client and the ClientPool. The Client is a wrapper around the Axios library to manage configurations and instances. The ClientPool manages multiple Client instances, enabling reuse and efficient handling of numerous requests in high-load scenarios.",
   "author": "nhanthanh93",
   "main": "dist/index.js",

@@ -1,7 +1,9 @@
-import { AxiosRequestConfig, AxiosResponse, RawAxiosRequestHeaders } from 'axios';
+import { AxiosError, AxiosRequestConfig, AxiosResponse, RawAxiosRequestHeaders } from 'axios';
 declare class Client {
     private instance;
     constructor(baseURL: string, timeout?: number);
+    private setupInterceptors;
+    handleErrors(errorHandler?: (error: AxiosError) => Promise<any>): void;
     setHeaders(headers: RawAxiosRequestHeaders): void;
     get<T>(url: string, params?: Record<string, any>, config?: AxiosRequestConfig): Promise<AxiosResponse<T>>;
     post<T>(url: string, data?: object, config?: AxiosRequestConfig): Promise<AxiosResponse<T>>;

@@ -58,8 +58,13 @@ var Client = /** @class */ (function () {
             baseURL: baseURL,
             timeout: timeout,
         });
-        this.instance.interceptors.response.use(function (response) { return response; }, function (error) { return Promise.reject(error); });
     }
+    Client.prototype.setupInterceptors = function (errorHandler) {
+        this.instance.interceptors.response.use(function (response) { return response; }, errorHandler || (function (error) { return Promise.reject(error); }));
+    };
+    Client.prototype.handleErrors = function (errorHandler) {
+        this.setupInterceptors(errorHandler);
+    };
     Client.prototype.setHeaders = function (headers) {
         var _this = this;
         Object.keys(headers).forEach(function (key) {
