@@ -76,6 +76,14 @@ apiClient.setHeaders({
   'Custom-Header': 'customValue1'
 });
 
+// Set handle errors (error: AxiosError)
+apiClient.handleErrors((error) => {
+    // Custom error handling logic here
+    console.error('Error occurred:', error);
+
+    return Promise.reject(error);
+})
+
 // Example usage
 (async () => {
   try {
@@ -123,6 +131,13 @@ client1.setHeaders({
   'Custom-Header': 'customValue1'
 });
 
+// Set handle errors (error: AxiosError)
+client1.handleErrors((error) => {
+    // Custom error handling logic here
+    console.error('Error occurred:', error);
+    return Promise.reject(error);
+})
+
 // Create client pool with a size limit
 const poolSize = 2;
 
@@ -134,7 +149,7 @@ cpool.addClient('server3', client3);
 
 console.log('Current clients in pool:', cpool.listClients());
 
-async fetchData() {
+async function fetchData() {
   try {
     const server2Data = await cpool.request('server2', 'get', '/posts/1');
     console.log('Server2 Data:', server2Data);
@@ -148,6 +163,7 @@ async fetchData() {
 
 
 ```
+
 
 ### Credits
 
