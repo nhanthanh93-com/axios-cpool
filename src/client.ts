@@ -13,10 +13,21 @@ class Client {
       baseURL,
       timeout,
     });
+  }
+
+  private setupInterceptors(
+    errorHandler?: (error: AxiosError) => Promise<any>,
+  ): void {
     this.instance.interceptors.response.use(
       (response) => response,
-      (error: AxiosError) => Promise.reject(error),
+      errorHandler || ((error: AxiosError) => Promise.reject(error)),
     );
+  }
+
+  public handleErrors(
+    errorHandler?: (error: AxiosError) => Promise<any>,
+  ): void {
+    this.setupInterceptors(errorHandler);
   }
 
   public setHeaders(headers: RawAxiosRequestHeaders): void {
